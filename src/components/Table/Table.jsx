@@ -70,11 +70,11 @@ const TABLE_HEAD = [
 ];
 
 const Table = ({ lang = "ru" }) => {
-  
+  //
   const [sortBy, setSortBy] = useState("");
   const [sortOrder, setSortOrder] = useState(0);
 
-  const [users, loading, error] = useUsers(1, 10);
+  const [users, loading, error] = useUsers(1, 10, sortBy, sortOrder);
 
   console.log(users);
   return (
@@ -88,6 +88,7 @@ const Table = ({ lang = "ru" }) => {
             keys={column.tag}
             setSortBy={setSortBy}
             setSortOrder={setSortOrder}
+            canOrdering={true}
           />
         ))}
     </div>
