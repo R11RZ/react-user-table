@@ -31,4 +31,11 @@
     align-items: center;
     justify-content: space-between;
     cursor:pointer;
+    overflow:hidden;
+}
+.Users-Table-Column-Header h3 {
+    width: 90%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
