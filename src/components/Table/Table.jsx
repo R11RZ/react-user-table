@@ -10,6 +10,7 @@ const TABLE_HEAD = [
       en: "Last name",
     },
     tag: ["lastName"],
+    isOrdering: true,
   },
   {
     title: {
@@ -17,6 +18,7 @@ const TABLE_HEAD = [
       en: "First name",
     },
     tag: ["firstName"],
+    isOrdering: true,
   },
   {
     title: {
@@ -24,6 +26,7 @@ const TABLE_HEAD = [
       en: "Middle name",
     },
     tag: ["middleName"],
+    isOrdering: true,
   },
   {
     title: {
@@ -31,13 +34,15 @@ const TABLE_HEAD = [
       en: "Age",
     },
     tag: ["age"],
+    isOrdering: true,
   },
   {
     title: {
-      ru: "Возраст",
-      en: "Age",
+      ru: "Пол",
+      en: "Gender",
     },
-    tag: ["age"],
+    tag: ["gender"],
+    isOrdering: true,
   },
   {
     title: {
@@ -45,6 +50,7 @@ const TABLE_HEAD = [
       en: "Phone number",
     },
     tag: ["phone"],
+    isOrdering: true,
   },
   {
     title: {
@@ -52,6 +58,7 @@ const TABLE_HEAD = [
       en: "Email",
     },
     tag: ["email"],
+    isOrdering: false,
   },
   {
     title: {
@@ -59,6 +66,7 @@ const TABLE_HEAD = [
       en: "Country",
     },
     tag: ["address", "country"],
+    isOrdering: false,
   },
   {
     title: {
@@ -66,6 +74,7 @@ const TABLE_HEAD = [
       en: "City",
     },
     tag: ["address", "city"],
+    isOrdering: false,
   },
 ];
 
@@ -88,7 +97,9 @@ const Table = ({ lang = "ru" }) => {
             keys={column.tag}
             setSortBy={setSortBy}
             setSortOrder={setSortOrder}
-            canOrdering={true}
+            canOrdering={column.isOrdering}
+            sortBy={sortBy}
+            sortOrder={sortOrder}
           />
         ))}
     </div>
