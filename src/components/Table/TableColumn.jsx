@@ -41,9 +41,11 @@ const TableColumn = ({
   canOrdering,
   sortBy,
   sortOrder,
+  width,
+  index
 }) => {
   return (
-    <div className="Users-Table-Column">
+    <div id={`table_column-${index}`} style={{width: `${width}px`}} className="Users-Table-Column">
       <div
         onClick={() =>
           canOrdering
