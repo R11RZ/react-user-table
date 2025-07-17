@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useUsers } from "../../hooks/useUsers";
 import "./Table.css";
 import TableColumn from "./TableColumn";
@@ -89,29 +89,28 @@ const TABLE_HEAD = [
 ];
 
 
-//TODO need to add event listener (resize table)
 function getWidthById(id) {
   return document.getElementById(id).clientWidth;
 }
 
 export function ResizeColumn(tableInfo, setTableInfo, index, delta) {
   // init check width
+
   if (tableInfo[0].width === "auto")
     setTableInfo((prev) => {
-      return prev.map(
-        (item, index) => ({...item,width : getWidthById(`table_column-${index}`)})
-      );
+      return prev.map((item, index) => ({
+        ...item,
+        width: getWidthById(`table_column-${index}`),
+      }));
     });
-
+  console.log("asdds")
   setTableInfo((prev) => {
     let newTableInfo = [...prev];
     if (newTableInfo[index].width + delta < 50) return prev;
     if (newTableInfo[index + 1].width - delta < 50) return prev;
-    if (
-      newTableInfo.reduce((acc, item) => acc + item.width, 0) >=
-      getWidthById("user-table")
-    )
-      return prev;
+    console.log(newTableInfo.reduce((acc, item) => acc + item.width, 0) , getWidthById("user-table"))
+
+    console.log("asdds44")
     newTableInfo[index].width += delta;
     newTableInfo[index + 1].width -= delta;
 
@@ -129,11 +128,29 @@ const Table = ({ lang = "ru" }) => {
 
   const [users, loading, error] = useUsers(1, 10, sortBy, sortOrder);
 
+  useEffect(() => {
+          console.log("geewww")
+    const handleResize = () => {
+      console.log("gee")
+      setTableInfo((prev) => {
+      return prev.map((item) => ({
+        ...item,
+        width: "auto",
+      }));
+
+    });
+          console.log(tableInfo);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <div id="user-table" className="Users-Table">
       {tableInfo &&
         tableInfo.map((column, index) => (
-          <div className="Users-Table-Column-Wrapper" key={index}>
+          <div style={{width: `${column.width}px`}} id={`table_column-${index}`}  className="Users-Table-Column-Wrapper" key={index}>
             <TableColumn
               key={index}
               data={users.users}

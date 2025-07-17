@@ -45,7 +45,7 @@ const TableColumn = ({
   index
 }) => {
   return (
-    <div id={`table_column-${index}`} style={{width: `${width}px`}} className="Users-Table-Column">
+    <div  className="Users-Table-Column">
       <div
         onClick={() =>
           canOrdering
