@@ -9,7 +9,6 @@ const Pagination = ({
   skip,
   total_users,
 }) => {
-  console.log(total_users);
   return (
     <div className="Pagination-Wrapper">
       <button
@@ -21,7 +20,7 @@ const Pagination = ({
       <select
         className="Pagination-Select"
         value={limit}
-        onChange={(e) => setInPage(e.target.value)}
+        onChange={(e) => setInPage(parseInt(e.target.value))}
       >
         {PaginationValue.map((value, index) => (
           <option key={index}>{value}</option>
