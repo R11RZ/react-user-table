@@ -1,0 +1,37 @@
+.Pagination-Wrapper{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    gap: 20px;
+}
+.Pagination-btn{
+    color: var(--color-font);
+    border: 1px solid var(--color-font);
+    font-size: large;
+    padding: 10px;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.Pagination-btn-deactive{
+    color: var(--color-background);
+    border: 1px solid var(--color-background);
+    font-size: large;
+    padding: 10px;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor:default;
+    
+}
+.Pagination-btn-deactive:hover{
+    border: 1px solid var(--color-background);
+}
+.Pagination-Select{
+    width: 70px;
+    height: 25px;
+}

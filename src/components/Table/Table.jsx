@@ -3,6 +3,7 @@ import { useUsers } from "../../hooks/useUsers";
 import "./Table.css";
 import TableColumn from "./TableColumn";
 import TableDragger from "./TableDragger";
+import Pagination from "../Pagination/Pagination";
 
 const TABLE_HEAD = [
   {
@@ -88,7 +89,6 @@ const TABLE_HEAD = [
   },
 ];
 
-
 function getWidthById(id) {
   return document.getElementById(id).clientWidth;
 }
@@ -103,14 +103,17 @@ export function ResizeColumn(tableInfo, setTableInfo, index, delta) {
         width: getWidthById(`table_column-${index}`),
       }));
     });
-  console.log("asdds")
+  console.log("asdds");
   setTableInfo((prev) => {
     let newTableInfo = [...prev];
     if (newTableInfo[index].width + delta < 50) return prev;
     if (newTableInfo[index + 1].width - delta < 50) return prev;
-    console.log(newTableInfo.reduce((acc, item) => acc + item.width, 0) , getWidthById("user-table"))
+    console.log(
+      newTableInfo.reduce((acc, item) => acc + item.width, 0),
+      getWidthById("user-table")
+    );
 
-    console.log("asdds44")
+    console.log("asdds44");
     newTableInfo[index].width += delta;
     newTableInfo[index + 1].width -= delta;
 
@@ -125,21 +128,21 @@ const Table = ({ lang = "ru" }) => {
   const [tableInfo, setTableInfo] = useState(TABLE_HEAD);
   const [sortBy, setSortBy] = useState("");
   const [sortOrder, setSortOrder] = useState(0);
-
-  const [users, loading, error] = useUsers(1, 10, sortBy, sortOrder);
+  const [skip, setSkip] = useState(0);
+  const [inPage, setInPage] = useState(10);
+  const [users, loading, error] = useUsers(skip, inPage, sortBy, sortOrder);
 
   useEffect(() => {
-          console.log("geewww")
+    console.log("geewww");
     const handleResize = () => {
-      console.log("gee")
+      console.log("gee");
       setTableInfo((prev) => {
-      return prev.map((item) => ({
-        ...item,
-        width: "auto",
-      }));
-
-    });
-          console.log(tableInfo);
+        return prev.map((item) => ({
+          ...item,
+          width: "auto",
+        }));
+      });
+      console.log(tableInfo);
     };
 
     window.addEventListener("resize", handleResize);
@@ -147,33 +150,41 @@ const Table = ({ lang = "ru" }) => {
   }, []);
 
   return (
-    <div id="user-table" className="Users-Table">
-      {tableInfo &&
-        tableInfo.map((column, index) => (
-          <div style={{width: `${column.width}px`}} id={`table_column-${index}`}  className="Users-Table-Column-Wrapper" key={index}>
-            <TableColumn
+    <>
+      <div id="user-table" className="Users-Table">
+        {tableInfo &&
+          tableInfo.map((column, index) => (
+            <div
+              style={{ width: `${column.width}px` }}
+              id={`table_column-${index}`}
+              className="Users-Table-Column-Wrapper"
               key={index}
-              data={users.users}
-              nameColumn={column.title[lang]}
-              keys={column.tag}
-              setSortBy={setSortBy}
-              setSortOrder={setSortOrder}
-              canOrdering={column.isOrdering}
-              sortBy={sortBy}
-              sortOrder={sortOrder}
-              width={column.width}
-              index={index}
-            />
-            {index !== tableInfo.length - 1 && (
-              <TableDragger
+            >
+              <TableColumn
+                key={index}
+                data={users.users}
+                nameColumn={column.title[lang]}
+                keys={column.tag}
+                setSortBy={setSortBy}
+                setSortOrder={setSortOrder}
+                canOrdering={column.isOrdering}
+                sortBy={sortBy}
+                sortOrder={sortOrder}
+                width={column.width}
                 index={index}
-                tableInfo={tableInfo}
-                setTableInfo={setTableInfo}
               />
-            )}
-          </div>
-        ))}
-    </div>
+              {index !== tableInfo.length - 1 && (
+                <TableDragger
+                  index={index}
+                  tableInfo={tableInfo}
+                  setTableInfo={setTableInfo}
+                />
+              )}
+            </div>
+          ))}
+      </div>
+      <Pagination limit={inPage} skip={users.skip} total_users={users.total}  setSkip={setSkip} setInPage={setInPage} />
+    </>
   );
 };
 
