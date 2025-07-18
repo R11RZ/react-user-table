@@ -10,7 +10,6 @@ export function useUsers(skip = 0, inpage = 10 ,  sortBy , sortOrder) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    console.log("yes")
     setLoading(true)
     fetch(API_ENDPOINT + `?limit=${inpage}&skip=${skip}` + (sortBy && sortOrder ? `&sortBy=${sortBy}&order=${ORDER_DIRECTION[sortOrder-1]}`: "") )
       .then((res) => res.json())

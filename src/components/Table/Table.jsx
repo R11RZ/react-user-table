@@ -4,6 +4,7 @@ import "./Table.css";
 import TableColumn from "./TableColumn";
 import TableDragger from "./TableDragger";
 import Pagination from "../Pagination/Pagination";
+import Loader from "../Loader/Loader";
 
 const TABLE_HEAD = [
   {
@@ -152,7 +153,7 @@ const Table = ({ lang = "ru" }) => {
   return (
     <>
       <div id="user-table" className="Users-Table">
-        {tableInfo &&
+        {!loading && tableInfo &&
           tableInfo.map((column, index) => (
             <div
               style={{ width: `${column.width}px` }}
@@ -170,7 +171,6 @@ const Table = ({ lang = "ru" }) => {
                 canOrdering={column.isOrdering}
                 sortBy={sortBy}
                 sortOrder={sortOrder}
-                width={column.width}
                 index={index}
               />
               {index !== tableInfo.length - 1 && (
@@ -182,6 +182,7 @@ const Table = ({ lang = "ru" }) => {
               )}
             </div>
           ))}
+          {loading && <Loader />}
       </div>
       <Pagination limit={inPage} skip={users.skip} total_users={users.total}  setSkip={setSkip} setInPage={setInPage} />
     </>

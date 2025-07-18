@@ -10,7 +10,7 @@ export function useUser(index) {
 
   useEffect(() => {
     setLoading(true)
-    fetch(API_ENDPOINT + toString(index) )
+    fetch(API_ENDPOINT + index)
       .then((res) => res.json())
       .then(setUser)
       .catch(setError)

@@ -1,3 +1,4 @@
+import { useModal } from "../../Context/ModalUserContext";
 import "./Table.css";
 
 function getKeygValue(obj, keys) {
@@ -41,9 +42,9 @@ const TableColumn = ({
   canOrdering,
   sortBy,
   sortOrder,
-  width,
   index
 }) => {
+  const {openModal} = useModal();
   return (
     <div  className="Users-Table-Column">
       <div
@@ -66,7 +67,7 @@ const TableColumn = ({
         keys &&
         data.map((user, index) => {
           return (
-            <div className="Users-Table-Column-Cell" key={index}>
+            <div onClick={()=> openModal(user.id)} className="Users-Table-Column-Cell" key={index}>
               {getKeygValue(user, keys) || "-"}
             </div>
           );
