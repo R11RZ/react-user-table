@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useUsers } from "../../hooks/useUsers";
 import "./Table.css";
 import TableColumn from "./TableColumn";
@@ -6,21 +6,23 @@ import TableDragger from "./TableDragger";
 import Pagination from "../Pagination/Pagination";
 import Loader from "../Loader/Loader";
 import { useLang } from "../../Context/LangContext";
-import Search from "../Search/Search";
-import { SearchSelectParams } from "../Search/initSearchInfo";
+import Filter from "../Filter/Filter";
+import { SearchFilterParams } from "../Filter/initFilterInfo";
 import { TABLE_HEAD } from "./initTableInfo";
+import { useNotification } from "../../Context/NotificationContext";
 
 
 
 
 const Table = () => {
   const { lang } = useLang();
+  const { setErrorNotif } = useNotification();
 
   const [typeFilter, setTypeFilter] = useState("client"); // client - filter in front && api - filter on api
   const [searchString, setSearchString] = useState("");
   const [searchParams, setSearchParams] = useState({
-    value: SearchSelectParams[1],
-    id: 1,
+    value: SearchFilterParams[0],
+    id: 0,
   });
 
   const [tableInfo, setTableInfo] = useState(TABLE_HEAD);
@@ -39,6 +41,13 @@ const Table = () => {
     searchParams
   );
 
+    useEffect(() => {
+    if (error) {
+      setErrorNotif(error);
+      return;
+    }
+  }, [error]);
+
   useEffect(() => {
     const handleResize = () => {
       setTableInfo((prev) => {
@@ -55,7 +64,7 @@ const Table = () => {
 
   return (
     <>
-      <Search
+      <Filter
         typeFilter={typeFilter}
         setTypeFilter={setTypeFilter}
         searchParams={searchParams}

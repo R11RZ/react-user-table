@@ -43,13 +43,21 @@ export function useUsers(
           ? `&sortBy=${sortBy}&order=${ORDER_DIRECTION[sortOrder - 1]}`
           : "")
     )
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`Http Error ${res.status}`);
+        }
+        return res.json();
+      })
       .then((e) =>
         typeFilter === "client" && searchString
           ? clientFilterUsers(e, searchString, searchParams, setUsers)
           : setUsers(e)
       )
-      .catch(setError)
+      .catch((e) => {
+        setUsers({});
+        setError(e);
+      })
       .finally(() => setLoading(false));
   }, [skip, inpage, sortBy, sortOrder, typeFilter, searchString, searchParams]);
 

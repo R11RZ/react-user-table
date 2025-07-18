@@ -6,7 +6,7 @@ const LangContext = createContext();
 export const useLang = () => useContext(LangContext);
 
 export function LangProvider({children}) {
-  const [lang, setLang] = useState("Ru");
+  const [lang, setLang] = useState(localStorage.getItem("lang"));
 
   useEffect(() => {
     if (!lang) {

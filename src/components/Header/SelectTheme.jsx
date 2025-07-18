@@ -3,17 +3,20 @@ import "./Header.css";
 import DarkTheme from "../../Icons/DarkTheme";
 import LightTheme from "../../Icons/LightTheme";
 
+const InitTheme = () => {
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme) return savedTheme;
+
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  return prefersDark ? "dark" : "light";
+};
+
 const SelectTheme = () => {
-  const [theme, setTheme] = useState(localStorage.getItem("theme"));
+  const [theme, setTheme] = useState(InitTheme());
 
   useEffect(() => {
-    if (!theme) {
-      const prefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)"
-      ).matches;
-      setTheme(prefersDark ? "dark" : "light");
-    }
     document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
   }, [theme]);
 
   return (

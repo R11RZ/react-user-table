@@ -1,11 +1,4 @@
-export const SearchSelectParams = [
-  {
-    title: {
-      Ru: "Имя",
-      En: "First Name",
-    },
-    key: "firstName",
-  },
+export const SearchFilterParams = [
   {
     title: {
       Ru: "Фамилия",
@@ -13,6 +6,14 @@ export const SearchSelectParams = [
     },
     key: "lastName",
   },
+  {
+    title: {
+      Ru: "Имя",
+      En: "First Name",
+    },
+    key: "firstName",
+  },
+
   {
     title: {
       Ru: "Отчество",

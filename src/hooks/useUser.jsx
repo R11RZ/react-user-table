@@ -2,22 +2,29 @@ import { useEffect, useState } from "react";
 
 const API_ENDPOINT = "https://dummyjson.com/users/";
 
-
-export function useUser(index) {
+export function useUser(id) {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if(!index) return;
-    setLoading(true)
-    fetch(API_ENDPOINT + index)
-      .then((res) => res.json())
+    if (!id) return;
+    setLoading(true);
+    setError(null);
+    fetch(API_ENDPOINT + id)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`Http Error ${res.status}`);
+        }
+        return res.json();
+      })
       .then(setUser)
-      .catch(setError)
+      .catch((e) => {
+        setUser({});
+        setError(e);
+      })
       .finally(() => setLoading(false));
-  }, [index]);
+  }, [id]);
 
-  return [user , loading , error ]
+  return [user, loading, error];
 }
-

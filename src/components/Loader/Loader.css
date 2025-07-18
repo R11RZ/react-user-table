@@ -1,11 +1,10 @@
 .loader {
   width: 60px;
   aspect-ratio: 4;
-  --_g: no-repeat radial-gradient(circle closest-side,var(--color-font) 90%,var(--color-font));
   background: 
-    var(--_g) 0%   50%,
-    var(--_g) 50%  50%,
-    var(--_g) 100% 50%;
+    var(--loader) 0%   50%,
+    var(--loader) 50%  50%,
+    var(--loader) 100% 50%;
   background-size: calc(100%/3) 100%;
   animation: l7 1s infinite linear;
 }
@@ -15,10 +14,3 @@
     66%{background-size:calc(100%/3) 100%,calc(100%/3) 100%,calc(100%/3) 0%  }
 }
 
-.loader-wrapper{
-    width: 100%;
-    min-height: 400px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}

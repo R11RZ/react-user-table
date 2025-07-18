@@ -1,4 +1,4 @@
-.Search-Wrapper{
+.Filter-Wrapper{
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -8,7 +8,7 @@
     gap: 10px;
     margin-top: 15px;
 }
-.Search-Wrapper input{
+.Filter-Wrapper input{
     background-color: var(--color-background);
     color: var(--color-font);
     height: 25;
@@ -17,14 +17,14 @@
     width: 200px;
     border: 1px solid var(--color-font);
 }
-.Search-Wrapper select{
+.Filter-Wrapper select{
     background-color: var(--color-background);
     color: var(--color-font);
     height: 30px;
     border-radius: 7px;
-        padding: 2px;
+    padding: 5px;
 }
-.Select{
+.Filter{
     width: 100%;
     display: flex;
     justify-content: center;
@@ -34,7 +34,7 @@
 .Select h4{
     margin: 5px;
 }
-.Select-Btns{
+.Filter-Select-Btns{
     display: flex;
     width: 100%;
     align-items: center;
@@ -42,11 +42,11 @@
     margin: 5px;
     gap: 10px;
 }
-.Select-Btn{
+.Filter-Select-Btn{
     width: 100px;
     color: var(--color-font);
 }
-.Select-Btn-active{
+.Filter-Select-Btn-active{
     width: 100px;
     background-color: var(--color-font);
     color: var(--color-background);
