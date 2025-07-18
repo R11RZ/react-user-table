@@ -67,7 +67,7 @@
 }
 .Users-Table-Column-Dragger{
 user-select: none;
-    width: 5px;
+    width: 2px;
     align-self: stretch;
     flex-direction: row;
     background-color: var(--color-font);
