@@ -1,7 +1,7 @@
-import { ResizeColumn } from "./Table";
+
+import { ResizeColumn } from "../../utils/ResizeColumn";
 import "./Table.css";
 
-const ChangeColumnWidth = () => {};
 
 const TableDragger = ({ index, tableInfo, setTableInfo }) => {
 

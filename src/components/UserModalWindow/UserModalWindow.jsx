@@ -104,7 +104,7 @@ const UserModalWindow = () => {
 
                 {ModalTable.map((ele, index) => {
                   return (
-                    <div className="Modal-row">
+                    <div key={index} className="Modal-row">
                       <div className="Modal-cell">{ele.title[lang]}</div>
                       <div className="Modal-cell">
                         {getValueObjFromArrayKeys(user, ele.key) || "-"}
