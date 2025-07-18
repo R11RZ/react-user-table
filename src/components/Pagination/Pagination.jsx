@@ -10,10 +10,11 @@ const Pagination = ({
   total_users,
 }) => {
   return (
+    <div className="Pagination">
     <div className="Pagination-Wrapper">
       <button
-        onClick={() => (skip - limit >= 0 ? setSkip(skip - limit) : null)}
-        className={(skip - limit >= 0) ? "Pagination-btn" : "Pagination-btn-deactive"  }
+        onClick={() => (skip - limit >= 0 ? setSkip(skip - limit) : setSkip(0))}
+        className={(skip !== 0) ? "Pagination-btn" : "Pagination-btn-deactive"  }
       >
         ←
       </button>
@@ -34,6 +35,8 @@ const Pagination = ({
       >
         →
       </button>
+    </div>
+    <div>{skip+limit}/{total_users}</div>
     </div>
   );
 };
