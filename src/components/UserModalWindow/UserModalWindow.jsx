@@ -1,13 +1,95 @@
+import { useLang } from "../../Context/LangContext";
 import { useModal } from "../../Context/ModalUserContext";
 import { useUser } from "../../hooks/useUser";
+import { getValueObjFromArrayKeys } from "../../utils/parseArrayKeys";
 import Loader from "../Loader/Loader";
 
 import "./UserModalWindow.css";
+
+const ModalTable = [
+  {
+    title: {
+      Ru: "Фамилия",
+      En: "Last Name",
+    },
+    key: ["lastName"],
+  },
+  {
+    title: {
+      Ru: "Имя",
+      En: "First Name",
+    },
+    key: ["firstName"],
+  },
+  {
+    title: {
+      Ru: "Отчество",
+      En: "Middle Name",
+    },
+    key: ["middleName"],
+  },
+  {
+    title: {
+      Ru: "Возраст",
+      En: "Age",
+    },
+    key: ["age"],
+  },
+  {
+    title: {
+      Ru: "Страна",
+      En: "Country",
+    },
+    key: ["address" , "country"],
+  },
+  {
+    title: {
+      Ru: "Город",
+      En: "City",
+    },
+    key: ["address" , "city"] ,
+  },
+  {
+    title: {
+      Ru: "Адрес",
+      En: "Address",
+    },
+    key: ["address" , "address"],
+  },
+  {
+    title: {
+      Ru: "Рост",
+      En: "Height",
+    },
+    key: ["height"],
+  },
+  {
+    title: {
+      Ru: "Вес",
+      En: "Weight",
+    },
+    key: ["weight"],
+  },
+  {
+    title: {
+      Ru: "Номер телефона",
+      En: "Phone number",
+    },
+    key: ["phone"],
+  },
+  {
+    title: {
+      Ru: "Электронная почта",
+      En: "Email",
+    },
+    key: ["email"],
+  },
+];
+
 const UserModalWindow = () => {
   const { modalData, closeModal } = useModal();
-
+  const { lang } = useLang();
   const [user, loading, error] = useUser(modalData);
-  console.log(user);
   return (
     <>
       {modalData && (
@@ -19,44 +101,17 @@ const UserModalWindow = () => {
                   <button onClick={() => closeModal()}>⨯</button>
                 </div>
                 <img className="Modal-Img" src={user.image}></img>
-                <div className="Modal-row">
-                  <div className="Modal-cell">ФИО</div>
-                  <div className="Modal-cell">
-                    {user.firstName + " " + user.lastName}
-                  </div>
-                </div>
-                <div className="Modal-row">
-                  <div className="Modal-cell">Возраст</div>
-                  <div className="Modal-cell">{user.age}</div>
-                </div>
-                <div className="Modal-row">
-                  <div className="Modal-cell">Страна</div>
-                  <div className="Modal-cell">{user?.address?.country}</div>
-                </div>
-                <div className="Modal-row">
-                  <div className="Modal-cell">Город</div>
-                  <div className="Modal-cell">{user?.address?.city}</div>
-                </div>
-                <div className="Modal-row">
-                  <div className="Modal-cell">Адрес</div>
-                  <div className="Modal-cell">{user?.address?.address}</div>
-                </div>
-                <div className="Modal-row">
-                  <div className="Modal-cell">Рост</div>
-                  <div className="Modal-cell">{user.height}</div>
-                </div>
-                <div className="Modal-row">
-                  <div className="Modal-cell">Вес</div>
-                  <div className="Modal-cell">{user.weight}</div>
-                </div>
-                <div className="Modal-row">
-                  <div className="Modal-cell">Номер Телефона</div>
-                  <div className="Modal-cell">{user.phone}</div>
-                </div>
-                <div className="Modal-row">
-                  <div className="Modal-cell">Email</div>
-                  <div className="Modal-cell">{user.email}</div>
-                </div>
+
+                {ModalTable.map((ele, index) => {
+                  return (
+                    <div className="Modal-row">
+                      <div className="Modal-cell">{ele.title[lang]}</div>
+                      <div className="Modal-cell">
+                        {getValueObjFromArrayKeys(user, ele.key) || "-"}
+                      </div>
+                    </div>
+                  );
+                })}
               </>
             )}
             {loading && <Loader />}

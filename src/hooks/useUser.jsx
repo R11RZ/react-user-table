@@ -9,6 +9,7 @@ export function useUser(index) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    if(!index) return;
     setLoading(true)
     fetch(API_ENDPOINT + index)
       .then((res) => res.json())

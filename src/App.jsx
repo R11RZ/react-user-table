@@ -1,15 +1,22 @@
+import { useEffect, useState } from "react";
 import "./App.css";
+import Header from "./components/Header/Header";
 import Table from "./components/Table/Table";
 import UserModalWindow from "./components/UserModalWindow/UserModalWindow";
 import { ModalProvider } from "./Context/ModalUserContext";
+import { LangProvider } from "./Context/LangContext";
 
 function App() {
+
   return (
     <>
-      <ModalProvider>
-        <Table />
-        <UserModalWindow />
-      </ModalProvider>
+      <LangProvider>
+        <ModalProvider>
+          <Header />
+          <Table />
+          <UserModalWindow />
+        </ModalProvider>
+      </LangProvider>
     </>
   );
 }

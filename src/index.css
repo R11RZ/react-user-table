@@ -6,6 +6,7 @@
   color-scheme: light dark;
   --color-font: rgba(255, 255, 255, 0.87);
   --color-background: #242424;
+  --color-btn: #1a1a1a;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -15,6 +16,7 @@
 [data-theme="light"]{
   --color-font: #213547;
   --color-background: #ffffff;
+  --color-btn: #f0f0f0;
 }
 
 
@@ -23,6 +25,8 @@ body {
   padding: 0;
   width: 100%;
   min-height: 100vh;
+  background-color: var(--color-background);
+  color: var(--color-font);
 }
 
 
@@ -33,14 +37,20 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--color-btn);
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: #181faa;
 }
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+select{
+  background-color: var(--color-background);
+  color: var(--color-font);
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
 }

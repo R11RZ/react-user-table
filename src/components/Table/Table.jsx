@@ -5,12 +5,13 @@ import TableColumn from "./TableColumn";
 import TableDragger from "./TableDragger";
 import Pagination from "../Pagination/Pagination";
 import Loader from "../Loader/Loader";
+import { useLang } from "../../Context/LangContext";
 
 const TABLE_HEAD = [
   {
     title: {
-      ru: "Фамилия",
-      en: "Last name",
+      Ru: "Фамилия",
+      En: "Last name",
     },
     tag: ["lastName"],
     isOrdering: true,
@@ -18,8 +19,8 @@ const TABLE_HEAD = [
   },
   {
     title: {
-      ru: "Имя",
-      en: "First name",
+      Ru: "Имя",
+      En: "First name",
     },
     tag: ["firstName"],
     isOrdering: true,
@@ -27,8 +28,8 @@ const TABLE_HEAD = [
   },
   {
     title: {
-      ru: "Отчество",
-      en: "Middle name",
+      Ru: "Отчество",
+      En: "Middle name",
     },
     tag: ["middleName"],
     isOrdering: true,
@@ -36,8 +37,8 @@ const TABLE_HEAD = [
   },
   {
     title: {
-      ru: "Возраст",
-      en: "Age",
+      Ru: "Возраст",
+      En: "Age",
     },
     tag: ["age"],
     isOrdering: true,
@@ -45,8 +46,8 @@ const TABLE_HEAD = [
   },
   {
     title: {
-      ru: "Пол",
-      en: "Gender",
+      Ru: "Пол",
+      En: "Gender",
     },
     tag: ["gender"],
     isOrdering: true,
@@ -54,8 +55,8 @@ const TABLE_HEAD = [
   },
   {
     title: {
-      ru: "Номер Телефона",
-      en: "Phone number",
+      Ru: "Номер Телефона",
+      En: "Phone number",
     },
     tag: ["phone"],
     isOrdering: true,
@@ -63,8 +64,8 @@ const TABLE_HEAD = [
   },
   {
     title: {
-      ru: "Электронная Почта",
-      en: "Email",
+      Ru: "Электронная Почта",
+      En: "Email",
     },
     tag: ["email"],
     isOrdering: false,
@@ -72,8 +73,8 @@ const TABLE_HEAD = [
   },
   {
     title: {
-      ru: "Страна",
-      en: "Country",
+      Ru: "Страна",
+      En: "Country",
     },
     tag: ["address", "country"],
     isOrdering: false,
@@ -81,8 +82,8 @@ const TABLE_HEAD = [
   },
   {
     title: {
-      ru: "Город",
-      en: "City",
+      Ru: "Город",
+      En: "City",
     },
     tag: ["address", "city"],
     isOrdering: false,
@@ -125,7 +126,8 @@ export function ResizeColumn(tableInfo, setTableInfo, index, delta) {
   });
 }
 
-const Table = ({ lang = "ru" }) => {
+const Table = () => {
+  const {lang} = useLang()
   const [tableInfo, setTableInfo] = useState(TABLE_HEAD);
   const [sortBy, setSortBy] = useState("");
   const [sortOrder, setSortOrder] = useState(0);

@@ -1,6 +1,6 @@
 import "./Pagination.css";
 
-const PaginationValue = [5, 10, 15, 30, 50];
+const PaginationValue = [5, 10, 15, 30, 50 , 100];
 
 const Pagination = ({
   setSkip,
@@ -36,7 +36,7 @@ const Pagination = ({
         →
       </button>
     </div>
-    <div>{skip+limit}/{total_users}</div>
+    <div>{skip}/{total_users}</div>
     </div>
   );
 };

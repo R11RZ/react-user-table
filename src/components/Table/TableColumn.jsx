@@ -1,14 +1,7 @@
 import { useModal } from "../../Context/ModalUserContext";
+import { getValueObjFromArrayKeys } from "../../utils/parseArrayKeys";
 import "./Table.css";
 
-function getKeygValue(obj, keys) {
-  let tempObj = obj;
-  for (let index = 0; index < keys.length; index++) {
-    if (!tempObj[keys[index]]) return;
-    tempObj = tempObj[keys[index]];
-  }
-  return tempObj;
-}
 
 const ChangeOrder = (setSortBy, setSortOrder, key) => {
   setSortBy((prev) => {
@@ -68,7 +61,7 @@ const TableColumn = ({
         data.map((user, index) => {
           return (
             <div onClick={()=> openModal(user.id)} className="Users-Table-Column-Cell" key={index}>
-              {getKeygValue(user, keys) || "-"}
+              {getValueObjFromArrayKeys(user, keys) || "-"}
             </div>
           );
         })}
