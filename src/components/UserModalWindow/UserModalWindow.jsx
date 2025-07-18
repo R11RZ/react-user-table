@@ -27,26 +27,21 @@ const UserModalWindow = () => {
       {!error && modalData && (
         <div onClick={() => closeModal()} className="Modal-BG">
           <div onClick={(e) => e.stopPropagation()} className="Modal-Window">
-            {!loading && (
-              <>
-                <div className="Modal-Close-Wrapper">
-                  <button onClick={() => closeModal()}>⨯</button>
-                </div>
-                <img className="Modal-Img" src={user.image}></img>
+            <div className="Modal-Close-Wrapper">
+              <button onClick={() => closeModal()}>⨯</button>
+            </div>
+            <img className="Modal-Img" src={user.image}></img>
 
-                {ModalTable.map((ele, index) => {
-                  return (
-                    <div key={index} className="Modal-row">
-                      <div className="Modal-cell">{ele.title[lang]}</div>
-                      <div className="Modal-cell">
-                        {getValueObjFromArrayKeys(user, ele.key) || "-"}
-                      </div>
-                    </div>
-                  );
-                })}
-              </>
-            )}
-            {loading && <Loader />}
+            {ModalTable.map((ele, index) => {
+              return (
+                <div key={index} className="Modal-row">
+                  <div className="Modal-cell">{ele.title[lang]}</div>
+                  <div className="Modal-cell">
+                    {getValueObjFromArrayKeys(user, ele.key) || "-"}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       )}

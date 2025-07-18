@@ -1,21 +1,22 @@
 import { useLang } from "../../Context/LangContext";
 import { SearchFilterParams } from "./initFilterInfo";
 import "./Filter.css";
+import { useState } from "react";
 
 const FilterTitle = {
-  title:{
+  title: {
     Ru: "Фильтровать на",
     En: "Filter on",
   },
-  btn1:{
+  btn1: {
     Ru: "сервере",
     En: "server",
   },
-  btn2:{
+  btn2: {
     Ru: "клиенте",
     En: "client",
-  }
-}
+  },
+};
 
 const Filter = ({
   searchParams,
@@ -27,14 +28,17 @@ const Filter = ({
 }) => {
   const { lang } = useLang();
 
+  //needed so that unnecessary rerenders are not called
+  const [localTypeFilter, setLocalTypeFilter] = useState(typeFilter);
+
   return (
     <div className="Filter">
       <h4>{FilterTitle.title[lang]}</h4>
       <div className="Filter-Select-Btns">
         <button
-          onClick={() => setTypeFilter("api")}
+          onClick={() => setLocalTypeFilter("api")}
           className={
-            typeFilter === "api"
+            localTypeFilter === "api"
               ? "Filter-Select-Btn-active"
               : "Filter-Select-Btn"
           }
@@ -42,9 +46,9 @@ const Filter = ({
           {FilterTitle.btn1[lang]}
         </button>
         <button
-          onClick={() => setTypeFilter("client")}
+          onClick={() => setLocalTypeFilter("client")}
           className={
-            typeFilter === "client"
+            localTypeFilter === "client"
               ? "Filter-Select-Btn-active"
               : "Filter-Select-Btn"
           }
@@ -54,12 +58,13 @@ const Filter = ({
       </div>
       <div className="Filter-Wrapper">
         <select
-          onChange={(e) =>
+          onChange={(e) => {
+            setTypeFilter(localTypeFilter);
             setSearchParams({
               value: SearchFilterParams[parseInt(e.target.value)],
               id: parseInt(e.target.value),
-            })
-          }
+            });
+          }}
           value={searchParams.id}
         >
           {SearchFilterParams.map((ele, index) => (
@@ -70,7 +75,10 @@ const Filter = ({
         </select>
         <input
           value={searchString}
-          onInput={(e) => setSearchString(e.target.value)}
+          onInput={(e) => {
+            setTypeFilter(localTypeFilter);
+            setSearchString(e.target.value);
+          }}
         />
       </div>
     </div>

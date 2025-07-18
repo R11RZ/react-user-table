@@ -1,3 +1,13 @@
+@keyframes TableShow {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+
 .Users-Table{
     width: 100%;
     max-width: 1400px;
@@ -7,6 +17,8 @@
     flex-direction: row;
     box-sizing: border-box;
     flex: 1;
+    animation: TableShow 1s ease-in forwards;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 .Users-Table-Column-Wrapper{
     width: 100%;
@@ -33,6 +45,7 @@
     box-sizing: border-box;
     white-space: nowrap;
     text-overflow: ellipsis;
+    cursor: pointer;
 }
 .Users-Table-Column-Header{
     border-top: 1px solid var(--color-font);
@@ -54,9 +67,17 @@
 }
 .Users-Table-Column-Dragger{
 user-select: none;
-    width: 2px;
+    width: 5px;
     align-self: stretch;
     flex-direction: row;
     background-color: var(--color-font);
     cursor:col-resize;
+}
+.Sort-Down{
+    color: var(--color-error);
+    font-size: x-large;
+}
+.Sort-Up{
+    color: var(--color-succes);
+    font-size: x-large;
 }

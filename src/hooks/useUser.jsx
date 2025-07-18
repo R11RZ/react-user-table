@@ -11,6 +11,7 @@ export function useUser(id) {
     if (!id) return;
     setLoading(true);
     setError(null);
+    setUser({})
     fetch(API_ENDPOINT + id)
       .then((res) => {
         if (!res.ok) {

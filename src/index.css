@@ -8,6 +8,7 @@
   --color-background: #242424;
   --color-btn: #1a1a1a;
   --color-error: #ff0000;
+  --color-succes: #00ff00;
   --loader: no-repeat radial-gradient(circle closest-side,#fff 90%,#ffff);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -19,6 +20,7 @@
   --color-background: #ffffff;
   --color-btn: #f0f0f0;
   --color-error: #ff0000;
+  --color-succes: #00ff00;
   --loader: no-repeat radial-gradient(circle closest-side,#000 90%,#0000);
 }
 

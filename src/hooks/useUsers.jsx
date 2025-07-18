@@ -6,13 +6,14 @@ const ORDER_DIRECTION = ["desc", "asc"];
 
 function clientFilterUsers(e, searchString, searchParams, setUsers) {
   if (!e) return;
+  const filtered = e.users.filter((val) => {
+    return val?.[searchParams?.value?.key]
+      ?.toLowerCase()
+      .includes(searchString.toLowerCase());
+  });
   setUsers({
     ...e,
-    users: e.users.filter((val) => {
-      return val[searchParams.value.key]
-        .toLowerCase()
-        .includes(searchString.toLowerCase());
-    }),
+    users: filtered,
   });
 }
 
@@ -31,6 +32,8 @@ export function useUsers(
 
   useEffect(() => {
     setLoading(true);
+    setError(null);
+    setUsers([]);
     let temp_skip = typeFilter === "client" && searchString ? 0 : skip;
     let temp_limit = typeFilter === "client" && searchString ? 0 : inpage;
     fetch(
@@ -55,7 +58,7 @@ export function useUsers(
           : setUsers(e)
       )
       .catch((e) => {
-        setUsers({});
+        setUsers([]);
         setError(e);
       })
       .finally(() => setLoading(false));

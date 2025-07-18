@@ -15,14 +15,14 @@ const ChangeOrder = (setSortBy, setSortOrder, key) => {
 };
 
 function GetSignSort(sortBy, sortOrder, key) {
-  if (sortBy !== key) return "-";
+  if (sortBy !== key) return "--";
   switch (sortOrder) {
     case 0:
-      return "-";
+      return <div>--</div>;
     case 1:
-      return "↓";
+      return <div className="Sort-Down">↓</div>;
     case 2:
-      return "↑";
+      return <div className="Sort-Up">↑</div>;
   }
 }
 
@@ -50,11 +50,9 @@ const TableColumn = ({
         className="Users-Table-Column-Header"
       >
         <h3>{nameColumn}</h3>
-        <div>
           {canOrdering
             ? GetSignSort(sortBy, sortOrder, keys[keys.length - 1])
             : ""}
-        </div>
       </div>
       {data &&
         keys &&
